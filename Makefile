@@ -18,6 +18,17 @@ help:
 	@printf "\n"
 
 
+## Cleanup the code base (remove the tests and coverage files)
+clean:
+	@echo "Cleaning up the code base"
+	@find . -name "*.pyc" -delete
+	@find . -name "__pycache__" -delete
+	@find . -name ".coverage" -delete
+	@find . -name ".pytest_cache" -delete
+	@find . -name "htmlcov" -type d -exec rm -rf {} +
+	@echo "Done"
+
+
 ## Install DEV and TEST dependencies
 install:
 	@echo "Installing development and test dependencies..."
@@ -37,12 +48,6 @@ test-cov-o:
 	@uv run pytest --cov=apps --cov-report=term-missing --cov-report=html && open htmlcov/index.html
 
 
-## Cleanup the code base (remove the tests and coverage files)
-clean:
-	@echo "Cleaning up the code base"
-	@find . -name "*.pyc" -delete
-	@find . -name "__pycache__" -delete
-	@find . -name ".coverage" -delete
-	@find . -name ".pytest_cache" -delete
-	@find . -name "htmlcov" -type d -exec rm -rf {} +
-	@echo "Done"
+# Prevent Make from treating extra words as targets
+%:
+	@:
