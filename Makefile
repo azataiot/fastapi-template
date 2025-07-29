@@ -1,5 +1,5 @@
 efault: help
-.PHONY: help install test test-cov test-cov-o clean
+.PHONY: help clean fastcms install test test-cov test-cov-o tree
 
 ## This help screen
 help:
@@ -29,6 +29,14 @@ clean:
 	@echo "Done"
 
 
+## Add fastcms from the source code
+fastcms:
+	@echo "Adding fastcms from the source code"
+	@uv lock --upgrade-package fastcms
+	@uv add "fastcms @ git+https://github.com/azataiot/fastcms"
+	@echo "Done"
+
+
 ## Install DEV and TEST dependencies
 install:
 	@echo "Installing development and test dependencies..."
@@ -46,6 +54,13 @@ test-cov:
 ## Test with coverage and open the report in browser
 test-cov-o:
 	@uv run pytest --cov=apps --cov-report=term-missing --cov-report=html && open htmlcov/index.html
+
+
+## List the project structure (tree command)
+tree:
+	@echo "Listing the project structure"
+	@tree -I 'node_modules|.venv|.git|__pycache__|.pytest_cache|htmlcov|.coverage' -L 3
+	@echo "Done"
 
 
 # Prevent Make from treating extra words as targets
