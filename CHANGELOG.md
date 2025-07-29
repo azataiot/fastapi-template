@@ -9,4 +9,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added pre-commit hooks. 
+- Added pre-commit hooks.
+- Added Makefile for easier development tasks.
